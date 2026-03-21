@@ -1,0 +1,5 @@
+<entities anm2root="gfx/" version="5">
+    <entity name="Tainted Heart" id="5" variant="420010" subtype="1" anm2path="pickupheart_taintedheart.anm2" collisionMass="3" collisionRadius="12" numGridCollisionPoints="24" friction="1" shadowSize="17" />
+    <entity name="Half Tainted Heart" id="5" variant="420010" subtype="2" anm2path="pickupheart_taintedhearthalf.anm2" collisionMass="3" collisionRadius="12" numGridCollisionPoints="24" friction="1" shadowSize="17" />
+    <entity name="Poop Baby" id="3" anm2path="familiar_poop baby.anm2" tags="cansacrifice" friction="1" shadowSize="11" />
+</entities>

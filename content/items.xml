@@ -1,0 +1,18 @@
+<items gfxroot="gfx/items/" version="1">
+    <passive id="1" name="Unstable File" gfx="collectibles_s001_unstablefile.png" description="Ever-Changing Stats" quality="0" cache="damage firedelay range speed" tags="offensive summonable nocantrip"/>
+    <active id="2" name="Anatomy Textbook" gfx="collectibles_s002_anatomytextbook.png" description="Bone Knowledge" maxcharges="6" chargetype="normal" quality="3" tags="nolostbr book" achievement="391" />
+    <passive id="3" name="Profane Orb" gfx="collectibles_s003_profaneorb.png" description="Destined for Insignificance" quality="4" cache="damage firedelay" tags="offensive summonable nocantrip" devilprice="2"/>
+    <passive id="4" name="Mother's Blessing" gfx="collectibles_s004_mothersblessing.png" description="Rotted Enemies" quality="3" tags="offensive summonable nocantrip"/>
+    <passive id="5" name="Lunch?" gfx="collectibles_s005_lunch.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="6" name="Dinner?" gfx="collectibles_s006_dinner.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="7" name="Dessert?" gfx="collectibles_s007_dessert.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="8" name="Breakfast?" gfx="collectibles_s008_breakfast.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="9" name="Rotten Meat?" gfx="collectibles_s009_rottenmeat.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="10" name="A Snack?" gfx="collectibles_s010_asnack.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="11" name="Midnight Snack?" gfx="collectibles_s011_midnightsnack.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="12" name="Supper?" gfx="collectibles_s012_supper.png" description="This doesn't feel right..." quality="1" tags="nolostbr nocantrip" />
+    <passive id="13" name="Panacea" gfx="collectibles_s013_panacea.png" description="You feel... weird" quality="3" tags="nolostbr nocantrip" />
+    <active id="14" name="Fleshy Dice" gfx="collectibles_s014_fleshydice.png" description="-1" maxcharges="3" chargetype="normal" quality="1" tags="offensive" />
+    <passive id="15" name="Cool Shades" gfx="collectibles_s015_coolshades.png" description="You feel cool" quality="3" tags="offensive summonable nocantrip" />
+    <familiar id="16" name="Poop Baby" gfx="placeholder.png" description="Turdy Baby" quality="1" cache="familiars" tags="baby poop monstermanual offensive summonable nocantrip" />
+</items>
