@@ -7,24 +7,29 @@ if EID then
 end
 
 function mod:SaveVariables()
-    if SaveManager.GetRunSave() then
-        if not multDamage then multDamage = 1 end
-        if not multMaxFireDelay then multMaxFireDelay = 1 end
-        if not multRange then multRange = 1 end
-        if not multSpeed then multSpeed = 1 end
-        if not multShotSpeed then multShotSpeed = 1 end
-        if not multLuck then multLuck = 1 end
+    repeat
+        if SaveManager.IsLoaded() == true then
+            print("SaveManager loaded!")
+            if SaveManager.GetRunSave() then
+                if not multDamage then multDamage = 1 end
+                if not multMaxFireDelay then multMaxFireDelay = 1 end
+                if not multRange then multRange = 1 end
+                if not multSpeed then multSpeed = 1 end
+                if not multShotSpeed then multShotSpeed = 1 end
+                if not multLuck then multLuck = 1 end
 
-        SaveManager.GetRunSave().UnstableFile = {
-            multDamage = multDamage,
-            multMaxFireDelay = multMaxFireDelay,
-            multRange = multRange,
-            multSpeed = multSpeed,
-            multShotSpeed = multShotSpeed,
-            multLuck = multLuck
-        }
-        shouldEvaluateCache = true
-    end
+                SaveManager.GetRunSave().UnstableFile = {
+                    multDamage = multDamage,
+                    multMaxFireDelay = multMaxFireDelay,
+                    multRange = multRange,
+                    multSpeed = multSpeed,
+                    multShotSpeed = multShotSpeed,
+                    multLuck = multLuck
+                }
+                shouldEvaluateCache = true
+            end
+        end
+    until SaveManager.IsLoaded() == true
 end
 
 function mod:PostGameStarted(IsContinued)
