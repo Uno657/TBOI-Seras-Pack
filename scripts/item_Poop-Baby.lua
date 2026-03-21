@@ -55,8 +55,8 @@ function mod:FamiliarUpdate(familiar)
         tear.CollisionDamage = TEAR_DAMAGE
 
         local tearSprite = tear:GetSprite()
-        tearSprite:Load("gfx/009.003_puke projectile.anm2",true)
-        tearSprite:Play("RegularTear4",true)
+        tearSprite:Load("gfx/tear_poop.anm2",true)
+        tearSprite:Play("Regular",true)
 
         familiar.FireCooldown = SHOOTING_COOLDOWN
 
