@@ -1,6 +1,6 @@
 # Version 0 // Pre-Release
 
-## Version 0.9 \[WIP\]
+## Version 0.9
 - Added a new item; Poop Baby
 - Removed some old print() functions from bug-testing
 - Changed items to use their local RNG objects rather than the global RNG object
