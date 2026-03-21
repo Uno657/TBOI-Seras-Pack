@@ -1,3 +1,5 @@
+-- TODO: fix up tear_poop.anm2, I changed the sprite file to only contain the necessary sprites which broke it
+
 local ITEM_CONFIG = Isaac.GetItemConfig():GetCollectible(CustomEnums.CollectibleType.COLLECTIBLE_POOP_BABY)
 local RECOMMENDED_SHIFT_IDX = 35
 
@@ -54,6 +56,7 @@ function mod:FamiliarUpdate(familiar)
 
         local tearSprite = tear:GetSprite()
         tearSprite:Load("gfx/009.003_puke projectile.anm2",true)
+        tearSprite:Play("RegularTear4",true)
 
         familiar.FireCooldown = SHOOTING_COOLDOWN
 
