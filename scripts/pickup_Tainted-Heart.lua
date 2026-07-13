@@ -7,16 +7,13 @@
       ^^^ also ill try my best at explaining how it works if you want me to
 
     TODO:
-     - Add holy mantle
-     - Move the hearts in accordance to ui scaling
-
      - Add compatibility
 ]]
 
--- vvv HeartManager Functions
+local CustomEnums = require("scripts.utility.enums.lua")
 
+-- vvv HeartManager Functions
 local HeartManager = {}
-print(Options.HUDOffset)
 
 function HeartManager:GetHeartStatus(HeartData)
     if HeartData then
@@ -158,11 +155,14 @@ function mod:PrePickupCollision(EntityPickup,_,_)
     local player = Isaac.GetPlayer()
     local heartCount = HeartManager:GetHeartCount()
 
+    print(heartCount)
+
     if EntityPickup.Variant == CustomEnums.PickupVariant.PICKUP_HEART
     and EntityPickup.SubType == CustomEnums.HeartSubType.HEART_TAINTED 
     and heartCount < player:GetHeartLimit() 
     and EntityPickup:GetSprite():IsPlaying("Collect") == false 
     then
+        print("Attempting to pick up heart")
         entities[EntityPickup] = EntityPickup:GetSprite()
         EntityPickup:PlayPickupSound()
         entities[EntityPickup]:Play("Collect",true)
@@ -172,6 +172,7 @@ function mod:PrePickupCollision(EntityPickup,_,_)
     and heartCount < player:GetHeartLimit() 
     and EntityPickup:GetSprite():IsPlaying("Collect") == false 
     then
+        print("Attempting to pick up heart")
         entities[EntityPickup] = EntityPickup:GetSprite()
         EntityPickup:PlayPickupSound()
         entities[EntityPickup]:Play("Collect",true)
@@ -348,11 +349,6 @@ function mod:PostRender()
 
             if player:GetExtraLives() > 0 then
                 if HeartManager:GetHeartCount() <= 12 then
-                    xPosRevives = 50 + ((HeartManager:GetHeartCount() + mantleSpace) / 2) * 12
-                    yPosRevives = 7.5
-                else
-                    xPosRevives = 122
-                    yPosRevives = 13
                     xPos = (xStart - 4) + (HeartManager:GetHeartCount() / 2) * 12
                     yPos = yStart - 8.5
                 else
@@ -437,7 +433,7 @@ mod:AddPriorityCallback(ModCallbacks.MC_PRE_GAME_EXIT, CallbackPriority.EARLY, m
 mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.PostGameStarted)
 
 -- Pickup Management
-mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.PrePickupCollision, PickupVariant.PICKUP_HEART)
+mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.PrePickupCollision, CustomEnums.PickupVariant.PICKUP_HEART)
 
 -- Rendering
 mod:AddCallback(ModCallbacks.MC_PRE_PLAYERHUD_RENDER_HEARTS, mod.PrePlayerHUDRenderHearts)
