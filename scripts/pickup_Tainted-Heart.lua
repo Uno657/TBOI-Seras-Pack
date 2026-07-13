@@ -16,6 +16,7 @@
 -- vvv HeartManager Functions
 
 local HeartManager = {}
+print(Options.HUDOffset)
 
 function HeartManager:GetHeartStatus(HeartData)
     if HeartData then
@@ -297,30 +298,32 @@ function mod:PostRender()
     end
     
     if shouldLoadHearts == true then
+        local xStart = (20 * Options.HUDOffset) + 50
+        local yStart = (20 * Options.HUDOffset) + 15.5
         if Game():GetLevel():GetCurses() & LevelCurse.CURSE_OF_THE_UNKNOWN == LevelCurse.CURSE_OF_THE_UNKNOWN then
             local uiSprite = Sprite()
             uiSprite:Load("gfx/ui/ui_hearts.anm2",true)
             uiSprite:Play("CurseHeart",true)
-            uiSprite:Render(Vector(55,15.5))
+            uiSprite:Render(Vector(xStart + 1,yStart))
         else
             for pos,HeartData in pairs(Hearts) do
                 if pos <= 6 and HeartData["Sprite"] then
-                    HeartData["Sprite"]:Render(Vector(54 + 12 * (pos - 1),15.5))
+                    HeartData["Sprite"]:Render(Vector(xStart + 12 * (pos - 1),yStart))
                 elseif pos > 6 and HeartData["Sprite"] then
-                    HeartData["Sprite"]:Render(Vector(54 + 12 * (pos - 7),25.5))
+                    HeartData["Sprite"]:Render(Vector(xStart + 12 * (pos - 7),yStart + 10))
                 end
                 if HeartData["EternalHeart"] ~= false and HeartData["EternalHeart"] then
                     if pos <= 6 then
-                        HeartData["EternalHeart"]:Render(Vector(54 + 12 * (pos - 1),15.5))
+                        HeartData["EternalHeart"]:Render(Vector(xStart + 12 * (pos - 1),yStart))
                     elseif pos > 6 then
-                        HeartData["EternalHeart"]:Render(Vector(54 + 12 * (pos - 7),25.5))
+                        HeartData["EternalHeart"]:Render(Vector(xStart + 12 * (pos - 7),yStart + 10))
                     end
                 end
                 if HeartData["GoldHeart"] ~= false and HeartData["GoldHeart"] then
                     if pos <= 6 then
-                        HeartData["GoldHeart"]:Render(Vector(54 + 12 * (pos - 1),15.5))
+                        HeartData["GoldHeart"]:Render(Vector(xStart + 12 * (pos - 1),yStart))
                     elseif pos > 6 then
-                        HeartData["GoldHeart"]:Render(Vector(54 + 12 * (pos - 7),25.5))
+                        HeartData["GoldHeart"]:Render(Vector(xStart + 12 * (pos - 7),yStart + 10))
                     end
                 end
             end
@@ -350,6 +353,11 @@ function mod:PostRender()
                 else
                     xPosRevives = 122
                     yPosRevives = 13
+                    xPos = (xStart - 4) + (HeartManager:GetHeartCount() / 2) * 12
+                    yPos = yStart - 8.5
+                else
+                    xPos = xStart + 72
+                    yPos = yStart - 2.5
                 end
 
                 if player:HasChanceRevive() == true then
