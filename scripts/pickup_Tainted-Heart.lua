@@ -5,6 +5,12 @@
     if you want to use this (since there isn't a custom health api as of when i made this), js ask me on discord, user @_serapher, im in the modding of isaac server :)
       ^^^ i will respond asap so dw abt it taking a while
       ^^^ also ill try my best at explaining how it works if you want me to
+
+    TODO:
+     - Add holy mantle
+     - Move the hearts in accordance to ui scaling
+
+     - Add compatibility
 ]]
 
 -- vvv HeartManager Functions
@@ -110,15 +116,20 @@ end
 -- vvv Save Data
 
 function mod:SaveVariables(ShouldSave)
-    if SaveManager.GetRunSave() and ShouldSave == true then
-        SaveManager.GetRunSave().Hearts = {}
-        for pos,HeartData in pairs(Hearts) do
-            SaveManager.GetRunSave().Hearts[pos] = {
-                ["isTaintedHeart"] = HeartData["isTaintedHeart"]
-            }
+    repeat
+        if SaveManager.IsLoaded() == true then
+            print("SaveManager loaded!")
+            if SaveManager.GetRunSave() and ShouldSave == true then
+                SaveManager.GetRunSave().Hearts = {}
+                for pos,HeartData in pairs(Hearts) do
+                    SaveManager.GetRunSave().Hearts[pos] = {
+                        ["isTaintedHeart"] = HeartData["isTaintedHeart"]
+                    }
+                end
+            end
+            shouldLoadHearts = false
         end
-    end
-    shouldLoadHearts = false
+    until SaveManager.IsLoaded() == true
 end
 
 function mod:PostGameStarted(IsContinued)
@@ -263,6 +274,14 @@ function mod:PreRender()
                 uiSprite:Play("GoldHeartOverlay",true)
                 HeartData["GoldHeart"] = uiSprite
             end
+
+            local player = Isaac.GetPlayer()
+            if player:GetEffects():GetCollectibleEffectNum(CollectibleType.COLLECTIBLE_HOLY_MANTLE) > 0 then
+                local uiSprite = Sprite()
+                uiSprite:Load("gfx/ui/ui_hearts.anm2",true)
+                uiSprite:Play("HolyMantle",true)
+                mantleSprite = uiSprite
+            end
         end
     end
 end
@@ -310,8 +329,30 @@ function mod:PostRender()
             end
 
             local player = Isaac.GetPlayer()
+            if player:GetEffects():GetCollectibleEffectNum(CollectibleType.COLLECTIBLE_HOLY_MANTLE) > 0 then
+                mantleSpace = 2
+                heartCount = HeartManager:GetHeartCount() / 2
+                local _,fracPart = math.modf(heartCount)
+                if fracPart == 0.5 then
+                    heartCount = heartCount + 0.5
+                end
+
+                if heartCount <= 6 then
+                    mantleSprite:Render(Vector(54 + 12 * (heartCount),15.5))
+                elseif heartCount > 6 then
+                    mantleSprite:Render(Vector(54 + 12 * (heartCount - 6)),25.5)
+                end
+            else
+                mantleSpace = 0
+            end
+
             if player:GetExtraLives() > 0 then
                 if HeartManager:GetHeartCount() <= 12 then
+                    xPosRevives = 50 + ((HeartManager:GetHeartCount() + mantleSpace) / 2) * 12
+                    yPosRevives = 7.5
+                else
+                    xPosRevives = 122
+                    yPosRevives = 13
                     xPos = (xStart - 4) + (HeartManager:GetHeartCount() / 2) * 12
                     yPos = yStart - 8.5
                 else
@@ -320,10 +361,10 @@ function mod:PostRender()
                 end
 
                 if player:HasChanceRevive() == true then
-                    xPos = xPos + 7
-                    Isaac.RenderText(tostring("x" .. player:GetExtraLives() .. "?"),xPos,yPos,1,1,1,1)
+                    xPosRevives = xPosRevives + 7
+                    Isaac.RenderText(tostring("x" .. player:GetExtraLives() .. "?"),xPosRevives,yPosRevives,1,1,1,1)
                 else
-                    Isaac.RenderText(tostring("x" .. player:GetExtraLives()),xPos,yPos,1,1,1,1)
+                    Isaac.RenderText(tostring("x" .. player:GetExtraLives()),xPosRevives,yPosRevives,1,1,1,1)
                 end
             end
         end
