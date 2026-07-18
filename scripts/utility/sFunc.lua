@@ -257,7 +257,7 @@ mod:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, mod.PostFireTear)
 -- vvv isEntry()
 --[[
 Used By:
-    trinket_Golden-Poop.lua
+    item_Style-Meter.lua
 ]]
 
 function sFunc:isEntry(table,value)
@@ -265,6 +265,7 @@ function sFunc:isEntry(table,value)
     for k,v in pairs(table) do
         if v == value then
             bool = true
+            break
         end
     end
 

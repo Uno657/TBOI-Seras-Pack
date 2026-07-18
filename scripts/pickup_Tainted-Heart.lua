@@ -348,7 +348,7 @@ function mod:PostRender()
     if shouldLoadHearts == true then
         -- account for the hudoffset setting
         local xOffsetMod = (20 * Options.HUDOffset) + 50
-        local yOffsetMod = (20 * Options.HUDOffset) + 15.5
+        local yOffsetMod = (20 * Options.HUDOffset) + 13.5
 
         if Game():GetLevel():GetCurses() & LevelCurse.CURSE_OF_THE_UNKNOWN == LevelCurse.CURSE_OF_THE_UNKNOWN then
             local uiSprite = Sprite()
@@ -387,10 +387,13 @@ function mod:PostRender()
                     heartCount = heartCount + 0.5
                 end
 
+                local xOffsetMod = (20 * Options.HUDOffset) + 50
+                local yOffsetMod = (20 * Options.HUDOffset) + 13.5
+
                 if heartCount <= 6 then
-                    mantleSprite:Render(Vector(54 + 12 * (heartCount),15.5))
+                    mantleSprite:Render(Vector(xOffsetMod + 12 * heartCount,yOffsetMod))
                 elseif heartCount > 6 then
-                    mantleSprite:Render(Vector(54 + 12 * (heartCount - 6)),25.5)
+                    mantleSprite:Render(Vector(xOffsetMod + 12 * (heartCount - 6),yOffsetMod + 10))
                 end
             else
                 mantleSpace = 0
