@@ -445,16 +445,16 @@ function mod:UseItem(_,_,_,_,_,_)
     for _,entity in ipairs(Isaac.GetRoomEntities()) do
         local EntityNPC = entity:ToNPC()
         if entity.Type == EntityType.ENTITY_FIRE_WORM then
-            local newEntity = Game():Spawn(EntityType.ENTITY_GYRO,1,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
+            Game():Spawn(EntityType.ENTITY_GYRO,1,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
             entity:Remove()
         elseif entity.Type == EntityType.ENTITY_PREY and entity.Variant == 0 then
-            local newEntity = Game():Spawn(EntityType.ENTITY_POLTY,1,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
+            Game():Spawn(EntityType.ENTITY_POLTY,1,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
             entity:Remove()
         elseif entity.Type == EntityType.ENTITY_MR_MINE then
-            local newEntity = Game():Spawn(EntityType.ENTITY_LEPER,1,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
+            Game():Spawn(EntityType.ENTITY_LEPER,1,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
             entity:Remove()
         elseif entity.Type == EntityType.ENTITY_RING_OF_FLIES then
-            local newEntity = Game():Spawn(EntityType.ENTITY_COD_WORM,0,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
+            Game():Spawn(EntityType.ENTITY_COD_WORM,0,entity.Position,entity.Velocity,nil,0,entity.InitSeed)
             entity:Remove()
         elseif entity.Type == EntityType.ENTITY_HEART then
             entity:Remove()

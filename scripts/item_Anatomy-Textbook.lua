@@ -8,7 +8,7 @@ end
 
 function mod:UseItem(_)
     Isaac.GetPlayer(0):AddBoneHearts(1)
-    SFXManager():Play(8)
+    SFXManager():Play(SoundEffect.SOUND_BOOK_PAGE_TURN_12)
     return {
         Discharge = true,
         Remove = false,

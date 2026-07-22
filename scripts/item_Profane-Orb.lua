@@ -66,7 +66,7 @@ function mod:PostTriggerCollectibleRemoved(player, CollectibleType)
     end
 end
 
-function mod:statMultiplier(player, flag)
+function mod:StatMultiplier(player, flag)
     if player:HasCollectible(CustomEnums.CollectibleType.COLLECTIBLE_PROFANE_ORB) and shouldEvaluateCache == true then
         if flag == CacheFlag.CACHE_DAMAGE then
             player.Damage = player.Damage * (1 + lowQualityItems / 10)
@@ -81,4 +81,4 @@ mod:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, mod.PostAddCollectible)
 mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.PostGameStarted)
 mod:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, mod.PostTriggerCollectibleRemoved)
 mod:AddPriorityCallback(ModCallbacks.MC_PRE_GAME_EXIT, CallbackPriority.EARLY, mod.SaveVariables)
-mod:AddPriorityCallback(ModCallbacks.MC_EVALUATE_CACHE, CallbackPriority.LATE, mod.statMultiplier)
+mod:AddPriorityCallback(ModCallbacks.MC_EVALUATE_CACHE, CallbackPriority.LATE, mod.StatMultiplier)
